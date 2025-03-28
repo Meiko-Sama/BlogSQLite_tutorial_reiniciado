@@ -2,12 +2,12 @@
 
 @font-face {
   font-family: "Copperplate";
-  src: url(../fonts/Copperplate.otf);
+  src: url(/static/fonts/Copperplate.otf);
 }
 
 @font-face {
   font-family: "JoseFins";
-  src: url(../fonts/JosefinSans.ttf);
+  src: url(/static/fonts/JosefinSans.ttf);
 }
 
 * {

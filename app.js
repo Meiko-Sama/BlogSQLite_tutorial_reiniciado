@@ -1,5 +1,6 @@
 // Criação da biblioteca
 
+const bodyParser = require("body-parser");
 const express = require("express"); // importa livraria do EXPRESS
 const sqlite3 = require("sqlite3"); // importa livraria do sqlite3
 
@@ -13,15 +14,20 @@ const db = new sqlite3.Database("user.db"); // Instância para o uso do SQlite3,
 db.serialize(() => {
   // Este método permite enviar comandos SQL em modo 'SEQUENCIAL'
   db.run(
-    "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)"
+    "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, password TEXT, email TEXT, celular TEXT, cpf TEXT, rg TEXT)"
   );
 });
 
 // Primeiro parametro é o caminho da URL, enquanto o segundo parâmetro éo caminho da pasta
 app.use("/static", express.static(__dirname + "/static"));
 
+//Midlleware para processar as aquicisões
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // Configurar EJS como motor de visualização
 app.set("view engine", "ejs");
+
+// A patir de agora utilizaremos a visualização através de render
 
 const index =
   "<a href='/home'>Home</a> <br><a href='/sobre'>Sobre</a> <br> <a href='/login'>Login</a> <br> <a href='/cadastro'>Cadastro</a>";
@@ -37,6 +43,7 @@ const cadastro = "Você está na página de CADASTRO  <br> <a href='/'>Voltar</a
 app.get("/", (req, res) => {
   // Rota raiz do meu servidor, acesse o browser com o endereço http://localhost:3000/
   // res.send(index);
+
   res.render("index"); // Utilizando o render pela pasta views
 });
 
@@ -61,6 +68,14 @@ app.post("/login", (req, res) => {
 });
 
 app.get("/cadastro", (req, res) => {
+  // Rota raiz do meu servidor da pagina CADASTRO, acesse o browser com o endereço http://localhost:3000/cadastro
+  res.send(cadastro);
+});
+
+app.post("/cadastro", (req, res) => {
+  req.body
+    ? console.log(JSON.stringify(req.body))
+    : console.log(`Body vazio: ${req.body}`);
   // Rota raiz do meu servidor da pagina CADASTRO, acesse o browser com o endereço http://localhost:3000/cadastro
   res.send(cadastro);
 });

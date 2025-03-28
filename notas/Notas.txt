@@ -92,6 +92,7 @@ ao repositório local.
 
             🇧🇷 Dando erro ainda? Faz o seguinte, o professor arruma pra voce!! Ou não...  
 
-
+Todo processamento realizado pelo backend é feito analisando o método HTTP enviado pelo cliente
+Para processar "formulario"HTML/CSS, o método ideal é o POST.
 
 
