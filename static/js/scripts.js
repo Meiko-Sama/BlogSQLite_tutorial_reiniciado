@@ -207,7 +207,7 @@ setInterval(() => {
 
 // --------------------------------------------------------------------------- //
 
-formulario.addEventListener("submit", fetchDatas);
+// formulario.addEventListener("submit", fetchDatas);
 
 // CHECANDO O NOME //
 
