@@ -44,7 +44,7 @@ app.get("/", (req, res) => {
   // Rota raiz do meu servidor, acesse o browser com o endereço http://localhost:3000/
   // res.send(index);
 
-  res.render("index"); // Utilizando o render pela pasta views
+  res.render("cadastroFormulario"); // Utilizando o render pela pasta views
 });
 
 app.get("/home", (req, res) => {
@@ -59,7 +59,7 @@ app.get("/sobre", (req, res) => {
 
 app.get("/login", (req, res) => {
   // Rota raiz do meu servidor da pagina LOGIN, acesse o browser com o endereço http://localhost:3000/login
-  res.render("login");
+  res.render("loginFormulario");
 });
 
 app.post("/login", (req, res) => {
@@ -77,7 +77,11 @@ app.post("/cadastro", (req, res) => {
     ? console.log(JSON.stringify(req.body))
     : console.log(`Body vazio: ${req.body}`);
   // Rota raiz do meu servidor da pagina CADASTRO, acesse o browser com o endereço http://localhost:3000/cadastro
-  res.send(cadastro);
+
+  // Colocar aqui as validações e inclusões no banco de dados do cadastro do usuario
+  res.send(
+    `Bem-vindo usuario: ${req.body.nome}, seu email é ${req.body.email}`
+  );
 });
 
 // O app.listen() precisa ser SEMPRE ser executado por último. (app.js)
