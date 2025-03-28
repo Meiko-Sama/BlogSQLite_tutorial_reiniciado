@@ -21,7 +21,7 @@ db.serialize(() => {
 // Primeiro parametro é o caminho da URL, enquanto o segundo parâmetro éo caminho da pasta
 app.use("/static", express.static(__dirname + "/static"));
 
-//Midlleware para processar as aquicisões
+//Midlleware para processar as requisições do Body Parameters do cliente
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Configurar EJS como motor de visualização
