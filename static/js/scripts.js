@@ -49,7 +49,7 @@ const checkEmail = (email) => {
   }
 };
 
-// ----- FUNÇÃO PARA VERIFICAE SENHA ------------------------------------------ //
+// ----- FUNÇÃO PARA VERIFICAR SENHA FORTE ------------------------------------------ //
 
 function checkPasswordStrength(senha) {
   if (!/[a-z]/.test(senha)) {
@@ -97,7 +97,7 @@ function maskPhoneNumber(event) {
   if (celular.length > 2) {
     celular = `(${celular.substring(0, 2)}) ${celular.substring(2)}`;
   } else if (celular.length > 0) {
-    celular = `(${celular}Atua`;
+    celular = `(${celular}`;
   }
 
   if (celular.length > 10) {
@@ -107,9 +107,107 @@ function maskPhoneNumber(event) {
   event.target.value = celular;
 }
 
+// --- FUNÇÃO PARA INSERIR MASCARA NO cpf ------------------------------------- //
+
+function maskCPFNumber(event) {
+  let cpf = event.target.value;
+
+  if (/[A-Za-zÀ-ÿ]/.test(cpf)) {
+    createDisplayMsgError("O cpf deve conter apenas números");
+  } else {
+    createDisplayMsgError("");
+  }
+
+  cpf = cpf.replace(/\D/g, ""); // Remove os caracteres que não numéricos
+
+  if (cpf.length > 11) {
+    cpf = cpf.substring(0, 11);
+  }
+
+  if (cpf.length > 3) {
+    cpf = `${cpf.substring(0, 3)}.${cpf.substring(3)}`;
+  } else if (cpf.length > 0) {
+    cpf = `${cpf}`;
+  }
+
+  if (cpf.length > 7) {
+    cpf = `${cpf.substring(0, 7)}.${cpf.substring(7)}`;
+  } else if (cpf.length > 0) {
+    cpf = `${cpf}`;
+  }
+
+  if (cpf.length > 11) {
+    cpf = `${cpf.substring(0, 11)} - ${cpf.substring(11)}`;
+  } else if (cpf.length > 0) {
+    cpf = `${cpf}`;
+  }
+
+  event.target.value = cpf;
+}
+
+// --- FUNÇÃO PARA INSERIR MASCARA NO rg ----------------------------------------- //
+
+function maskRGNumber(event) {
+  let rg = event.target.value;
+
+  if (/[A-Za-zÀ-ÿ]/.test(rg)) {
+    createDisplayMsgError("O cpf deve conter apenas números");
+  } else {
+    createDisplayMsgError("");
+  }
+
+  rg = rg.replace(/\D/g, ""); // Remove os caracteres que não numéricos
+
+  if (rg.length > 9) {
+    rg = rg.substring(0, 9);
+  }
+
+  if (rg.length > 2) {
+    rg = `${rg.substring(0, 2)}.${rg.substring(2)}`;
+  } else if (rg.length > 0) {
+    rg = `${rg}`;
+  }
+
+  if (rg.length > 6) {
+    rg = `${rg.substring(0, 6)}.${rg.substring(6)}`;
+  } else if (rg.length > 0) {
+    rg = `${rg}`;
+  }
+
+  if (rg.length > 10) {
+    rg = `${rg.substring(0, 10)}-${rg.substring(10)}`;
+  } else if (rg.length > 0) {
+    rg = `${rg}`;
+  }
+  event.target.value = rg;
+}
+
+// --- FUNÇÃO PARA VERIFICAR IGUALDADE DA SENHA ------------------------------ //
+
+const rainFunction = () => {
+  let rain = document.createElement("span");
+  let cont_rain = document.getElementsByClassName("container_rain");
+  let left = Math.floor(Math.random() * (310 - 65) + 65);
+  let duration = Math.random() * 5;
+
+  rain.classList.add("rain");
+  cont_rain[0].appendChild(rain);
+
+  rain.style.left = left + "px";
+  rain.style.animationDuration = 1 + duration;
+
+  setTimeout(() => {
+    cont_rain[0].removeChild(rain);
+  }, 1500);
+};
+
+setInterval(() => {
+  rainFunction();
+}, 250);
+
 // --------------------------------------------------------------------------- //
 
-// formulario.addEventListener("submit", fetchDatas);
+formulario.addEventListener("submit", fetchDatas);
 
 // CHECANDO O NOME //
 
@@ -146,6 +244,14 @@ senha.addEventListener("input", () => {
 // Mascara no número de celular
 
 celular.addEventListener("input", maskPhoneNumber);
+
+// Mascara do cpf
+
+cpf.addEventListener("input", maskCPFNumber);
+
+// Mascara do rg
+
+rg.addEventListener("input", maskRGNumber);
 
 // VERIFICAÇÃO DE DADOS
 
